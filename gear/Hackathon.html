@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GearGuard: The Ultimate Maintenance Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="Hackathon.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-tools"></i>
+                <h1>Gear<span>Guard</span></h1>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" class="active" data-tab="dashboard">Dashboard</a></li>
+                    <li><a href="#" data-tab="kanban">Kanban Board</a></li>
+                    <li><a href="#" data-tab="equipment">Equipment</a></li>
+                    <li><a href="#" data-tab="calendar">Calendar</a></li>
+                    <li><a href="#" data-tab="teams">Teams</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-profile">
+                <div class="user-avatar">JD</div>
+                <div>
+                    <p style="font-weight: 500;">John Doe</p>
+                    <p style="font-size: 0.8rem; color: #ccc;">Maintenance Manager</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dashboard container">
+        <!-- Stats Cards -->
+        <div class="stats-cards">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="total-equipment">42</h3>
+                    <p>Total Equipment</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="open-requests">18</h3>
+                    <p>Open Requests</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="preventive-scheduled">9</h3>
+                    <p>Preventive Scheduled</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-user-cog"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="teams-count">4</h3>
+                    <p>Maintenance Teams</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Tabs -->
+        <div class="main-tabs">
+            <div class="tabs-header">
+                <button class="tab-btn active" data-tab="kanban">Kanban Board</button>
+                <button class="tab-btn" data-tab="equipment">Equipment</button>
+                <button class="tab-btn" data-tab="calendar">Calendar View</button>
+                <button class="tab-btn" data-tab="reports">Reports</button>
+            </div>
+            
+            <!-- Kanban Board Tab -->
+            <div id="kanban-tab" class="tab-content active">
+                <h2 class="section-title">Maintenance Kanban Board</h2>
+                <div class="kanban-board" id="kanban-board">
+                    <!-- Columns will be populated by JavaScript -->
+                </div>
+                <div class="form-actions" style="margin-top: 30px;">
+                    <button class="btn btn-primary" id="create-request-btn">
+                        <i class="fas fa-plus"></i> Create New Request
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Equipment Tab -->
+            <div id="equipment-tab" class="tab-content">
+                <h2 class="section-title">Equipment Database</h2>
+                <div class="equipment-list" id="equipment-list">
+                    <!-- Equipment cards will be populated by JavaScript -->
+                </div>
+                <div class="form-actions" style="margin-top: 30px;">
+                    <button class="btn btn-primary" id="add-equipment-btn">
+                        <i class="fas fa-plus"></i> Add New Equipment
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Calendar Tab -->
+            <div id="calendar-tab" class="tab-content">
+                <h2 class="section-title">Maintenance Calendar</h2>
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <h3 id="current-month">June 2023</h3>
+                        <div class="calendar-nav">
+                            <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
+                            <button id="today-btn">Today</button>
+                            <button id="next-month"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="calendar-grid" id="calendar-grid">
+                        <!-- Calendar days will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reports Tab -->
+            <div id="reports-tab" class="tab-content">
+                <h2 class="section-title">Maintenance Reports</h2>
+                <div style="background-color: white; border-radius: var(--border-radius); padding: 25px; box-shadow: var(--box-shadow);">
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="margin-bottom: 20px;">Requests by Team</h3>
+                        <div id="team-chart" style="height: 300px; background-color: #f8f9fa; border-radius: var(--border-radius); display: flex; align-items: flex-end; padding: 20px;">
+                            <!-- Chart bars will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="margin-bottom: 20px;">Requests by Equipment Category</h3>
+                        <div id="equipment-chart" style="height: 300px; background-color: #f8f9fa; border-radius: var(--border-radius); display: flex; align-items: flex-end; padding: 20px;">
+                            <!-- Chart bars will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <!-- Create Request Modal -->
+    <div id="request-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create Maintenance Request</h3>
+                <button class="close-btn" id="close-request-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="request-form">
+                    <div class="form-group">
+                        <label for="request-subject">Subject *</label>
+                        <input type="text" id="request-subject" class="form-control" placeholder="What is wrong? e.g. 'Leaking Oil'" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="request-type">Request Type *</label>
+                            <select id="request-type" class="form-control" required>
+                                <option value="">Select type</option>
+                                <option value="corrective">Corrective (Breakdown)</option>
+                                <option value="preventive">Preventive (Routine Checkup)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="request-equipment">Equipment *</label>
+                            <select id="request-equipment" class="form-control" required>
+                                <option value="">Select equipment</option>
+                                <!-- Equipment options will be populated by JavaScript -->
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="request-date">Scheduled Date</label>
+                            <input type="date" id="request-date" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="request-duration">Estimated Duration (hours)</label>
+                            <input type="number" id="request-duration" class="form-control" min="0.5" step="0.5" placeholder="e.g. 2.5">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="request-description">Description</label>
+                        <textarea id="request-description" class="form-control" rows="3" placeholder="Provide additional details about the issue..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancel-request">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Create Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Equipment Modal -->
+    <div id="equipment-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Equipment</h3>
+                <button class="close-btn" id="close-equipment-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="equipment-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="equipment-name">Equipment Name *</label>
+                            <input type="text" id="equipment-name" class="form-control" placeholder="e.g. CNC Machine" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="equipment-serial">Serial Number</label>
+                            <input type="text" id="equipment-serial" class="form-control" placeholder="e.g. SN-2023-001">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="equipment-category">Category *</label>
+                            <select id="equipment-category" class="form-control" required>
+                                <option value="">Select category</option>
+                                <option value="production">Production</option>
+                                <option value="it">IT Equipment</option>
+                                <option value="vehicle">Vehicle</option>
+                                <option value="facility">Facility</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="equipment-team">Maintenance Team *</label>
+                            <select id="equipment-team" class="form-control" required>
+                                <option value="">Select team</option>
+                                <option value="mechanics">Mechanics</option>
+                                <option value="electricians">Electricians</option>
+                                <option value="it-support">IT Support</option>
+                                <option value="general">General Maintenance</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="equipment-purchase">Purchase Date</label>
+                            <input type="date" id="equipment-purchase" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="equipment-warranty">Warranty Until</label>
+                            <input type="date" id="equipment-warranty" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="equipment-location">Location</label>
+                        <input type="text" id="equipment-location" class="form-control" placeholder="e.g. Production Area A">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="equipment-assigned">Assigned To</label>
+                        <select id="equipment-assigned" class="form-control">
+                            <option value="">Select employee</option>
+                            <option value="john-doe">John Doe</option>
+                            <option value="jane-smith">Jane Smith</option>
+                            <option value="mike-johnson">Mike Johnson</option>
+                            <option value="sarah-williams">Sarah Williams</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancel-equipment">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add Equipment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Request Details Modal -->
+    <div id="details-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Request Details</h3>
+                <button class="close-btn" id="close-details-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="details-content">
+                <!-- Request details will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+</body>
+<script src="Hackathon.js"></script>
+</html>
